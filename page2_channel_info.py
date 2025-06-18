@@ -29,14 +29,23 @@ class ChannelInfoPage(ctk.CTkFrame):
         button_width = 220
         button_height = 45
 
-        self.view3d_btn = ctk.CTkButton(button_frame, text="3D View Settings", width=button_width, height=button_height, command=lambda: controller.show_frame("NapariPage"))
+        self.view3d_btn = ctk.CTkButton(button_frame, text="3D View", width=button_width, height=button_height, command=self.validate_and_go_3d)
         self.view3d_btn.pack(pady=10)
 
-        self.report_btn = ctk.CTkButton(button_frame, text="Quantification Report", width=button_width, height=button_height, command=lambda: controller.show_frame("ReportSettingsPage"))
+        self.report_btn = ctk.CTkButton(button_frame, text="Quantification Report", width=button_width, height=button_height, command=self.validate_and_go_report)
         self.report_btn.pack(pady=10)
 
         self.back_btn = ctk.CTkButton(button_frame, text="Back", width=button_width, height=button_height, command=lambda: controller.show_frame("FileSelectPage"))
         self.back_btn.pack(pady=10)
+
+    def validate_and_go_3d(self):
+        if self.validate_and_proceed():
+            self.controller.show_frame("NapariPage")
+
+    def validate_and_go_report(self):
+        if self.validate_and_proceed():
+            self.controller.show_frame("ReportSettingsPage")
+
 
     def tk_image_from_array(self, arr):
         im = Image.fromarray(arr).resize((150, 150))
@@ -72,6 +81,7 @@ class ChannelInfoPage(ctk.CTkFrame):
             return CTkImage(light_image=pil_img, size=target_size)
 
         default_assignments = ["Nuclei", "Other", "Aggregate", "Cell body"]
+        # default_assignments = []
 
         for c in range(C):
             img_slice = img[mid, c]
@@ -102,21 +112,41 @@ class ChannelInfoPage(ctk.CTkFrame):
     #         messagebox.showerror("Error", "Please select a type for each channel.")
     #         return
     #     self.controller.show_frame("NapariPage")
+            
+
+    # def validate_and_proceed(self):
+    #     selected = [s.get() for s in self.selections]
+
+    #     if "Select" in selected:
+    #         messagebox.showerror("Error", "Please select a type for each channel.")
+    #         return
+        
+    #     try:
+    #         aggregate_channel = selected.index("Aggregate")
+    #     except ValueError:
+    #         messagebox.showerror("Error", "Aggregate channel must be selected.")
+    #         return
+        
+    #     # Seçimi controller'a kaydet
+    #     self.controller.aggregate_channel = aggregate_channel
+    #     self.controller.selections = selected  # İstersen diğer seçimleri de kaydet
+
+    #     self.controller.show_frame("NapariPage")
+
+
     def validate_and_proceed(self):
         selected = [s.get() for s in self.selections]
+
         if "Select" in selected:
             messagebox.showerror("Error", "Please select a type for each channel.")
             return
-        
-        try:
-            aggregate_channel = selected.index("Aggregate")
-        except ValueError:
-            messagebox.showerror("Error", "Aggregate channel must be selected.")
-            return
-        
-        # Seçimi controller'a kaydet
-        self.controller.aggregate_channel = aggregate_channel
-        self.controller.selections = selected  # İstersen diğer seçimleri de kaydet
 
+        if len(selected) != len(set(selected)):
+            messagebox.showerror("Error", "Each channel type can only be selected once.")
+            return
+
+        # Seçimi controller'a kaydet
+        self.controller.selections = selected
+    
         self.controller.show_frame("NapariPage")
 

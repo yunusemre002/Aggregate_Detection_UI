@@ -12,46 +12,6 @@ class NapariPage(ctk.CTkFrame):
         super().__init__(parent)
         self.controller = controller
 
-        
-        # self.title = ctk.CTkLabel(self, text="3D View Settings", font=ctk.CTkFont(size=20, weight="bold"))
-        # self.title.pack(pady=20)
-
-        # self.description = ctk.CTkLabel(
-        #     self,
-        #     text="Adjust the parameters below to visualize the 3D aggregates.",
-        #     font=ctk.CTkFont(size=12),
-        #     text_color="gray"
-        # )
-        # self.description.pack(pady=5)
-
-        # form_frame = ctk.CTkFrame(self)
-        # form_frame.pack(pady=20)
-
-        # # Threshold Ratio
-        # threshold_label = ctk.CTkLabel(form_frame, text="Brightness Threshold (0-1):")
-        # threshold_label.grid(row=0, column=0, sticky="e", padx=5, pady=10)
-
-        # info_thresh_btn = ctk.CTkButton(form_frame, text="i", width=20, height=20, fg_color="gray", hover_color="darkgray",
-        #                                 command=self.show_threshold_info)
-        # info_thresh_btn.grid(row=0, column=1, sticky="w")
-
-        # self.threshold_entry = ctk.CTkEntry(form_frame, width=120)
-        # self.threshold_entry.insert(0, "0.6")
-        # self.threshold_entry.grid(row=0, column=2, padx=10, pady=10)
-
-        # # Min Size
-        # min_size_label = ctk.CTkLabel(form_frame, text="Minimum Aggregate Size (voxels):")
-        # min_size_label.grid(row=1, column=0, sticky="e", padx=5, pady=10)
-
-        # info_min_size_btn = ctk.CTkButton(form_frame, text="i", width=20, height=20, fg_color="gray", hover_color="darkgray",
-        #                                   command=self.show_min_size_info)
-        # info_min_size_btn.grid(row=1, column=1, sticky="w")
-
-        # self.min_size_entry = ctk.CTkEntry(form_frame, width=120)
-        # self.min_size_entry.insert(0, "10")
-        # self.min_size_entry.grid(row=1, column=2, padx=10, pady=10)
-
-
         box_frame = ctk.CTkFrame(self, corner_radius=10)
         box_frame.pack(pady=20)
 
@@ -94,9 +54,6 @@ class NapariPage(ctk.CTkFrame):
         form_frame.grid_columnconfigure(0, weight=1)  # Label sütunu esnek genişlesin
         form_frame.grid_columnconfigure(1, minsize=25)  # i butonu sütunu sabit küçük
         form_frame.grid_columnconfigure(2, minsize=130) # Entry sütunu sabit geniş
-
-
-
 
         button_frame = ctk.CTkFrame(self, fg_color="transparent")
         button_frame.pack(pady=10)
