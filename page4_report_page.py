@@ -12,7 +12,7 @@ class ReportPage(ctk.CTkFrame):
         super().__init__(parent)
         self.controller = controller
 
-        self.diameter_nuclei_var = ctk.StringVar(value="100")
+        self.diameter_nuclei_var = ctk.StringVar(value="25")
         self.diameter_cellbody_var = ctk.StringVar(value="100")
 
         ctk.CTkLabel(self, text="Quantification Report", font=ctk.CTkFont(size=20, weight="bold")).pack(pady=10)
